@@ -19,9 +19,31 @@ resource "google_compute_instance" "terra-1-r" {
       nat_ip = google_compute_address.terra-1-ip-r.address
     }
   }
+
   metadata = {
-    ssh-keys = "test:ed25519 ${tls_private_key.terra-1-key-r.private_key_openssh} test"
+    ssh-keys = "ajmal: ${tls_private_key.terra-1-key-r.public_key_openssh}"
   }
+
+  metadata_startup_script = <<EOF
+    #!/bin/bash
+    set -e
+    # Install required packages using the system package manager
+    apt-get update && apt-get install -y python3 ansible
+
+    # Install Docker using a separate Ansible playbook
+    /usr/bin/ansible-galaxy role install geerlingguy.docker
+
+cat <<EOF2 > /root/docker.yml
+- hosts: localhost
+  roles:
+    - role: geerlingguy.docker
+      vars:
+        docker_users: [ ajmal ]
+EOF2
+
+    # Run the Ansible playbook to configure Docker
+    /usr/bin/ansible-playbook /root/docker.yml
+EOF
 
 }
 
@@ -54,6 +76,6 @@ resource "tls_private_key" "terra-1-key-r" {
 }
 
 output "private_key" {
-  value     = tls_private_key.terra-1-key-r.private_key_pem
+  value     = tls_private_key.terra-1-key-r.private_key_openssh
   sensitive = true
 }
