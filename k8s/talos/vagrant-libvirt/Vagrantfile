@@ -3,8 +3,8 @@ Vagrant.configure("2") do |config|
       vm.vm.provider :libvirt do |domain|
         domain.cpus = 2
         domain.memory = 2048
-        domain.serial :type => "file", :source => {:path => "/tmp/control-plane-node-1.log"}
-        domain.storage :file, :device => :cdrom, :path => "/tmp/metal-amd64.iso"
+        domain.serial :type => "file", :source => {:path => "/home/ubuntu/talos/tmp/control-plane-node-1.log"}
+        domain.storage :file, :device => :cdrom, :path => "/home/ubuntu/talos/tmp/metal-amd64.iso"
         domain.storage :file, :size => '4G', :type => 'raw'
         domain.boot 'hd'
         domain.boot 'cdrom'
@@ -16,8 +16,8 @@ Vagrant.configure("2") do |config|
       vm.vm.provider :libvirt do |domain|
         domain.cpus = 2
         domain.memory = 2048
-        domain.serial :type => "file", :source => {:path => "/tmp/worker-node-1.log"}
-        domain.storage :file, :device => :cdrom, :path => "/tmp/metal-amd64.iso"
+        domain.serial :type => "file", :source => {:path => "/home/ubuntu/talos/tmp/worker-node-1.log"}
+        domain.storage :file, :device => :cdrom, :path => "/home/ubuntu/talos/tmp/metal-amd64.iso"
         domain.storage :file, :size => '4G', :type => 'raw'
         domain.boot 'hd'
         domain.boot 'cdrom'
@@ -29,8 +29,8 @@ Vagrant.configure("2") do |config|
         vm.vm.provider :libvirt do |domain|
           domain.cpus = 2
           domain.memory = 2048
-          domain.serial :type => "file", :source => {:path => "/tmp/worker-node-2.log"}
-          domain.storage :file, :device => :cdrom, :path => "/tmp/metal-amd64.iso"
+          domain.serial :type => "file", :source => {:path => "/home/ubuntu/talos/tmp/worker-node-2.log"}
+          domain.storage :file, :device => :cdrom, :path => "/home/ubuntu/talos/tmp/metal-amd64.iso"
           domain.storage :file, :size => '4G', :type => 'raw'
           domain.boot 'hd'
           domain.boot 'cdrom'
