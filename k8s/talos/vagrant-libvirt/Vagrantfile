@@ -8,6 +8,7 @@ Vagrant.configure("2") do |config|
         domain.storage :file, :size => '4G', :type => 'raw'
         domain.boot 'hd'
         domain.boot 'cdrom'
+        domain.storage_pool_name = "ubuntu"
       end
     end
   
@@ -20,6 +21,7 @@ Vagrant.configure("2") do |config|
         domain.storage :file, :size => '4G', :type => 'raw'
         domain.boot 'hd'
         domain.boot 'cdrom'
+        domain.storage_pool_name = "ubuntu"
       end
     end
 
@@ -32,6 +34,7 @@ Vagrant.configure("2") do |config|
           domain.storage :file, :size => '4G', :type => 'raw'
           domain.boot 'hd'
           domain.boot 'cdrom'
+          domain.storage_pool_name = "ubuntu"
         end
       end
 
